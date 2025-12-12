@@ -10,9 +10,9 @@ describe("validateTodoDescription (unit)", () => {
     expect(result.success).toBe(false);
   });
   test("should return sucess when description have more than 3 characters", () => {
- const description = "abcd";
+    const description = "abcd";
     const result = validateTodoDescription(description);
-     expect(result.errors).toStrictEqual([]);
+    expect(result.errors).toStrictEqual([]);
     expect(result.success).toBe(true);
   });
 });
