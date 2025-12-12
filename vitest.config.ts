@@ -2,6 +2,7 @@
 // Garante que o TypeScript reconheça os tipos do Vitest
 
 import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
@@ -9,6 +10,10 @@ export default defineConfig({
     environment: "jsdom",
 
     globals: true,
+
+    // Run everything in a single thread to avoid pool crashes in this project setup
+    pool: "threads",
+   
 
     fileParallelism: false,
     setupFiles: ["vitest.setup.ts"],
@@ -54,7 +59,7 @@ export default defineConfig({
     },
   },
 
-//   plugins: [react()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
