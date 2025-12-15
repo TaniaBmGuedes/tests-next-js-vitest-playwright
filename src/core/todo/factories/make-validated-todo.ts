@@ -3,17 +3,18 @@ import { InvalidTodo } from "./invalid-todo.contract";
 import { ValidTodo } from "./valid-todo.contract";
 import { validateTodoDescription } from "../schemas/validate-todo-description";
 import { makeNewTodo } from "./make-new-todo";
+import { TodoPresenter } from '../schemas/todo.contract';
 
-type MakeValidatedTod = ValidTodo | InvalidTodo;
 
-export function makeValidatedTod(description: string): MakeValidatedTod {
+
+export function makeValidatedTod(description: string): TodoPresenter {
   const cleandDescription = sanitizeStr(description);
   const validateDescription = validateTodoDescription(cleandDescription);
 
   if (validateDescription.success) {
     return {
       success: true,
-      data: makeNewTodo(cleandDescription),
+      todo: makeNewTodo(cleandDescription),
     };
   }
   return {

@@ -30,7 +30,7 @@ describe("makeValidatedTodo (unit)", () => {
 
     expect(result.success).toBe(true);
 
-    expect(result.data).toStrictEqual({
+    expect(result.todo).toStrictEqual({
       id: "any",
       description,
       createdAt: expect.any(String),
