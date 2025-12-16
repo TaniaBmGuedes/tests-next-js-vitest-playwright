@@ -13,14 +13,14 @@ describe('DrizzleTodoRepository (integration)', () => {
   });
 
   describe('findAll', () => {
-    test('returns an empty array when the table is empty', async () => {
+    test('returns an empty array when the table is clear', async () => {
       const { repository } = await makeTestTodoRepository();
       const result = await repository.findAll();
       expect(result).toStrictEqual([]);
       expect(result).toHaveLength(0);
     });
 
-    test('returns all todos in descending order', async () => {
+    test('returns all TODOs in descending order', async () => {
       const { repository } = await makeTestTodoRepository();
       await insertTestTodos();
       const result = await repository.findAll();
@@ -33,7 +33,7 @@ describe('DrizzleTodoRepository (integration)', () => {
   });
 
   describe('create', () => {
-    test('creates a todo when data is valid', async () => {
+    test('creates a todo when the data is valid', async () => {
       const { repository, todos } = await makeTestTodoRepository();
       const newTodo = await repository.create(todos[0]);
       expect(newTodo).toStrictEqual({
@@ -42,13 +42,13 @@ describe('DrizzleTodoRepository (integration)', () => {
       });
     });
 
-    test('fails when the description already exists', async () => {
+    test('fails if a duplicate description exists in the table', async () => {
       const { repository, todos } = await makeTestTodoRepository();
 
-      // Cria um novo todo
+      // Create a new todo
       await repository.create(todos[0]);
 
-      // Tenta criar um outro todo com a mesma descrição
+      // Attempt to create another todo with the same description
       const anotherTodo = {
         id: 'any id',
         description: todos[0].description,
@@ -62,13 +62,13 @@ describe('DrizzleTodoRepository (integration)', () => {
       });
     });
 
-    test('fails when the id already exists', async () => {
+    test('fails if a duplicate ID exists in the table', async () => {
       const { repository, todos } = await makeTestTodoRepository();
 
-      // Cria um novo todo
+      // Create a new todo
       await repository.create(todos[0]);
 
-      // Tenta criar um outro todo com o mesmo ID
+      // Attempt to create another todo with the same ID
       const anotherTodo = {
         id: todos[0].id,
         description: 'any description',
@@ -82,7 +82,7 @@ describe('DrizzleTodoRepository (integration)', () => {
       });
     });
 
-    test('fails when both id and description already exist', async () => {
+    test('fails if both the ID and description are duplicates', async () => {
       const { repository, todos } = await makeTestTodoRepository();
 
       await repository.create(todos[0]);
@@ -102,7 +102,7 @@ describe('DrizzleTodoRepository (integration)', () => {
   });
 
   describe('remove', () => {
-    test('deletes a todo when it exists', async () => {
+    test('deletes a todo if it exists', async () => {
       const { repository, todos } = await makeTestTodoRepository();
       await insertTestTodos();
       const result = await repository.remove(todos[0].id);
