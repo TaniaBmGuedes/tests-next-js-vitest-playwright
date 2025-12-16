@@ -136,11 +136,21 @@ export const Large: Story = {
           {children}
         </Button>
 
-        <Button variant='ghost' {...args} className='flex-1' icon={iconMap.hand}>
+        <Button
+          variant='ghost'
+          {...args}
+          className='flex-1'
+          icon={iconMap.hand}
+        >
           {children}
         </Button>
 
-        <Button variant='danger' {...args} className='flex-1' icon={iconMap.smile}>
+        <Button
+          variant='danger'
+          {...args}
+          className='flex-1'
+          icon={iconMap.smile}
+        >
           {children}
         </Button>
 

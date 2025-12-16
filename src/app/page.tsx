@@ -1,10 +1,10 @@
-import { TodoContainer } from "@/compoments/TodoContainer";
+import { TodoContainer } from '@/compoments/TodoContainer';
 import { Metadata } from 'next';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: "Testes com Vitest e Playwright",
+  title: 'Testes com Vitest e Playwright',
 };
 
 export default function Home() {

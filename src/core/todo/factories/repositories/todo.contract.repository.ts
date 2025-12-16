@@ -1,6 +1,5 @@
 import { Todo, TodoPresenter } from '../../schemas/todo.contract';
 
-
 export interface FindAllTodoRepository {
   findAll(): Promise<Todo[]>;
 }
@@ -14,6 +13,4 @@ export interface DeleteTodoRepository {
 }
 
 export interface TodoRepository
-  extends FindAllTodoRepository,
-    CreateTodoRepository,
-    DeleteTodoRepository {}
+  extends FindAllTodoRepository, CreateTodoRepository, DeleteTodoRepository {}

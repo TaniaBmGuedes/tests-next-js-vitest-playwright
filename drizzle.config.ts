@@ -1,4 +1,3 @@
-
 import { getFullEnv } from '@/env/config';
 import { defineConfig } from 'drizzle-kit';
 

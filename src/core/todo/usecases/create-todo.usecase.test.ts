@@ -3,7 +3,7 @@ import { InvalidTodo } from '../factories/invalid-todo.contract';
 import { ValidTodo } from '../schemas/todo.contract';
 import { createTodoUseCase } from './create-todo.usecase';
 
-describe("createTodoUseCase (integration)", () => {
+describe('createTodoUseCase (integration)', () => {
   beforeEach(async () => {
     const { deleteTodoNoWhere } = await makeTestTodoRepository();
     await deleteTodoNoWhere();
@@ -14,15 +14,15 @@ describe("createTodoUseCase (integration)", () => {
     await deleteTodoNoWhere();
   });
 
-  test("returns an error when validation fails", async () => {
-    const result = (await createTodoUseCase("")) as InvalidTodo;
+  test('returns an error when validation fails', async () => {
+    const result = (await createTodoUseCase('')) as InvalidTodo;
 
     expect(result.success).toBe(false);
     expect(result.errors).toHaveLength(1);
   });
 
-  test("returns the todo when validation passes", async () => {
-    const description = "This should work";
+  test('returns the todo when validation passes', async () => {
+    const description = 'This should work';
     const result = (await createTodoUseCase(description)) as ValidTodo;
 
     expect(result.success).toBe(true);
@@ -33,9 +33,9 @@ describe("createTodoUseCase (integration)", () => {
     });
   });
 
-  test("returns an error when the repository fails", async () => {
+  test('returns an error when the repository fails', async () => {
     // Create the todo once
-    const description = "This only works once";
+    const description = 'This only works once';
     (await createTodoUseCase(description)) as ValidTodo;
 
     // Attempt to recreate the todo and it SHOULD return an error
@@ -43,7 +43,7 @@ describe("createTodoUseCase (integration)", () => {
 
     expect(result.success).toBe(false);
     expect(result.errors).toStrictEqual([
-      "A todo with the provided id or description already exists",
+      'A todo with the provided id or description already exists',
     ]);
   });
 });

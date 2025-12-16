@@ -4,7 +4,6 @@ import { TodoList } from '.';
 import type { Meta, StoryObj } from '@storybook/react';
 import { todoActionStoryMock } from '@/core/_test_/mocks/tod-action-story';
 
-
 const meta: Meta<typeof TodoList> = {
   title: 'Components/Lists/TodoList',
   component: TodoList,

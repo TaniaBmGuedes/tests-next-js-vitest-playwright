@@ -12,7 +12,7 @@ const config: StorybookConfig = {
   features: {
     backgroundsStoryGlobals: false,
   },
-  viteFinal: async (config) => {
+  viteFinal: async config => {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),

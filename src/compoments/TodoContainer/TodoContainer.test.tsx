@@ -1,6 +1,9 @@
 import { render, screen, within } from '@testing-library/react';
 import { TodoContainer } from '.';
-import { insertTestTodos, makeTestTodoRepository } from '@/core/_test_/utils/make-test-todo-repository';
+import {
+  insertTestTodos,
+  makeTestTodoRepository,
+} from '@/core/_test_/utils/make-test-todo-repository';
 
 describe('<TodoContainer /> (integration)', () => {
   beforeEach(async () => {

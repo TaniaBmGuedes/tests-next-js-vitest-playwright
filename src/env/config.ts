@@ -1,31 +1,31 @@
-import { join } from "path";
+import { join } from 'path';
 
 const commonKeys = {
   drizzleSchemaFiles: [
-    join("src", "core", "todo", "schemas", "drizzle-todo-table.schema.ts"),
+    join('src', 'core', 'todo', 'schemas', 'drizzle-todo-table.schema.ts'),
   ],
-  drizzleMigrationsFolder: join("src", "db", "drizzle", "migrations"),
+  drizzleMigrationsFolder: join('src', 'db', 'drizzle', 'migrations'),
 };
 
 const envConfigs = {
   development: {
-    databaseFile: "dev.db.sqlite3",
-    currentEnv: "development",
+    databaseFile: 'dev.db.sqlite3',
+    currentEnv: 'development',
     ...commonKeys,
   },
   production: {
-    databaseFile: "prod.db.sqlite3",
-    currentEnv: "production",
+    databaseFile: 'prod.db.sqlite3',
+    currentEnv: 'production',
     ...commonKeys,
   },
   test: {
-    databaseFile: ".int.test.db.sqlite3",
-    currentEnv: "test",
+    databaseFile: '.int.test.db.sqlite3',
+    currentEnv: 'test',
     ...commonKeys,
   },
   e2e: {
-    databaseFile: "e2e.test.db.sqlite3",
-    currentEnv: "e2e",
+    databaseFile: 'e2e.test.db.sqlite3',
+    currentEnv: 'e2e',
     ...commonKeys,
   },
 } as const;
@@ -47,7 +47,7 @@ export function checkEnv(): AllowedEnvKeys {
 
   if (!currentEnv || !isValidEnv(currentEnv)) {
     throw new Error(
-      "Check the .env* files and the values in src/env/config.ts"
+      'Check the .env* files and the values in src/env/config.ts',
     );
   }
 

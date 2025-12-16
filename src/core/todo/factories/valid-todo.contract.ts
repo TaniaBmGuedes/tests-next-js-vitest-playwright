@@ -1,6 +1,6 @@
 import { Todo } from '../schemas/todo.contract';
 
 export type ValidTodo = {
-    success: true;
-    todo: Todo;
+  success: true;
+  todo: Todo;
 };

@@ -36,11 +36,13 @@ describe('Home page', () => {
       }),
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByRole('textbox', { name: 'Task' }),
-    ).toHaveAttribute('placeholder', 'Type your task');
-    expect(
-      screen.getByRole('button', { name: 'Create task' }),
-    ).toHaveAttribute('type', 'submit');
+    expect(screen.getByRole('textbox', { name: 'Task' })).toHaveAttribute(
+      'placeholder',
+      'Type your task',
+    );
+    expect(screen.getByRole('button', { name: 'Create task' })).toHaveAttribute(
+      'type',
+      'submit',
+    );
   });
 });

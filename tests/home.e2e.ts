@@ -1,5 +1,7 @@
-
-import { insertTestTodos, makeTestTodoRepository } from '@/core/_test_/utils/make-test-todo-repository';
+import {
+  insertTestTodos,
+  makeTestTodoRepository,
+} from '@/core/_test_/utils/make-test-todo-repository';
 import { test, expect, Page } from '@playwright/test';
 
 const HOME_URL = '/';
@@ -100,7 +102,9 @@ test.describe('<Home /> (E2E)', () => {
       await expect(todo2Item).toBeVisible();
     });
 
-    test('should disable the button while creating the TODO', async ({ page }) => {
+    test('should disable the button while creating the TODO', async ({
+      page,
+    }) => {
       const { input, btn } = getAll(page);
 
       await input.fill(NEW_TODO_TEXT);
@@ -118,7 +122,9 @@ test.describe('<Home /> (E2E)', () => {
       await expect(btn).toBeEnabled();
     });
 
-    test('should disable the input while creating the TODO', async ({ page }) => {
+    test('should disable the input while creating the TODO', async ({
+      page,
+    }) => {
       const { input, btn } = getAll(page);
 
       await input.fill(NEW_TODO_TEXT);
