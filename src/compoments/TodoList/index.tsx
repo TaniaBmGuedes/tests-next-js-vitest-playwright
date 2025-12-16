@@ -1,4 +1,6 @@
 
+'use client';
+import React from 'react';
 import { DeleteTodoAction } from '@/core/todo/actions/todo.actions.types';
 import { Todo } from '@/core/todo/schemas/todo.contract';
 import { sanitizeStr } from '@/utils/sanitize-str';
