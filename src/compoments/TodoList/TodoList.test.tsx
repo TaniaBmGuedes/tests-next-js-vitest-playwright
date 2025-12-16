@@ -7,14 +7,14 @@ import { mockTodos } from '@/core/_test_/mocks/todos';
 const user = userEvent.setup();
 
 describe('<TodoList /> (integration)', () => {
-  test('deve renderizar heading, lista e itens da lista de TODOs', async () => {
+  test('renders heading, list, and TODO list items', async () => {
     const { todos } = renderList();
 
     const heading = screen.getByRole('heading', {
-      name: /lista de tarefas/i,
+      name: /task list/i,
       level: 1,
     });
-    const list = screen.getByRole('list', { name: /lista de tarefas/i });
+    const list = screen.getByRole('list', { name: /task list/i });
     const items = screen.getAllByRole('listitem');
 
     expect(heading).toBeInTheDocument();
@@ -27,15 +27,15 @@ describe('<TodoList /> (integration)', () => {
     });
   });
 
-  test('não deve renderizar a lista de items sem TODOs', async () => {
+  test('does not render the list when there are no TODOs', async () => {
     renderList({ todos: [] });
 
-    const list = screen.queryByRole('list', { name: /lista de tarefas/i });
+    const list = screen.queryByRole('list', { name: /task list/i });
 
     expect(list).not.toBeInTheDocument();
   });
 
-  test('deve chamar a action correta para cada item da lista', async () => {
+  test('calls the correct action for each list item', async () => {
     const { action, todos } = renderList();
 
     const items = screen.getAllByRole('listitem');
@@ -54,10 +54,10 @@ describe('<TodoList /> (integration)', () => {
     expect(action.mock.calls[2][0]).toBe(todos[2].id);
   });
 
-  test('deve desativar os items da lista enquanto envia a action', async () => {
+  test('disables list items while sending the action', async () => {
     renderList({ delay: 10 });
 
-    const list = screen.getByRole('list', { name: /lista de tarefas/i });
+    const list = screen.getByRole('list', { name: /task list/i });
     const items = screen.getAllByRole('listitem');
     const btns = within(list).getAllByRole('button');
     await user.click(btns[1]);
@@ -74,10 +74,10 @@ describe('<TodoList /> (integration)', () => {
     });
   });
 
-  test('deve desativar os botões da lista enquanto envia a action', async () => {
+  test('disables list buttons while sending the action', async () => {
     renderList({ delay: 10 });
 
-    const list = screen.getByRole('list', { name: /lista de tarefas/i });
+    const list = screen.getByRole('list', { name: /task list/i });
     const btns = within(list).getAllByRole('button');
     await user.click(btns[1]);
 
@@ -90,7 +90,7 @@ describe('<TodoList /> (integration)', () => {
     });
   });
 
-  test('deve avisar o usuário se houver erro ao apagar o TODO', async () => {
+  test('alerts the user if there is an error deleting the TODO', async () => {
     renderList({ success: false });
 
     const alertFn = vi.fn();
@@ -98,10 +98,10 @@ describe('<TodoList /> (integration)', () => {
     const btns = screen.getAllByRole('button');
     await user.click(btns[1]);
 
-    expect(alertFn).toHaveBeenCalledExactlyOnceWith('falha ao apagar todo');
+    expect(alertFn).toHaveBeenCalledExactlyOnceWith('failed to delete todo');
   });
 
-  test('não deve chamar a action se o ID for inválido, vazio ou formado apenas com espaços', async () => {
+  test('does not call the action if the ID is invalid, empty, or only spaces', async () => {
     const { action } = renderList({
       todos: [{ id: '     ', description: '', createdAt: '' }],
     });
@@ -133,7 +133,7 @@ function renderList({
   };
   const actionErrorResult = {
     success: false,
-    errors: ['falha ao apagar todo'],
+    errors: ['failed to delete todo'],
   };
   const actionResult = success ? actionSuccessResult : actionErrorResult;
   const actionNoDelay = vi.fn().mockResolvedValue(actionResult);
