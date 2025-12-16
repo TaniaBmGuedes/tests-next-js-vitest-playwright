@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '.';
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -18,7 +19,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    children: 'Olá mundo',
+    children: 'Hi world',
     variant: 'default',
     size: 'lg',
   },
@@ -26,7 +27,7 @@ export const Default: Story = {
 
 export const Danger: Story = {
   args: {
-    children: 'Olá mundo',
+    children: 'Hola world',
     variant: 'danger',
     size: 'lg',
   },
@@ -34,7 +35,7 @@ export const Danger: Story = {
 
 export const Ghost: Story = {
   args: {
-    children: 'Olá mundo',
+    children: 'Olá world',
     variant: 'ghost',
     size: 'lg',
   },
