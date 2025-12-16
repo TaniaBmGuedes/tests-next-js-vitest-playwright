@@ -1,38 +1,43 @@
-import { InvalidTodo } from "@/core/todo/factories/invalid-todo.contract";
-import { ValidTodo } from "@/core/todo/schemas/todo.contract";
-import * as createTodoUseCaseMod from "@/core/todo/usecases/create-todo.usecase";
-import * as deleteTodoUseCaseMod from "@/core/todo/usecases/delete-todo.usecase";
+import { drizzleDatabase } from '@/db/drizzle';
+import { eq } from 'drizzle-orm';
+import { DrizzleTodoRepository } from '@/core/todo/factories/repositories/drizzle-todo.repository';
 
-import { revalidatePath } from "next/cache";
+export async function makeTestTodoRepository() {
+  const { db, todoTable } = drizzleDatabase;
+  const repository = new DrizzleTodoRepository(db);
+  const todos = makeTestTodos();
 
-export const makeTestTodoMocks = () => {
-  const successResult = {
-    success: true,
-    todo: {
-      id: "id",
-      description: "description",
-      createdAt: "createdAt",
-    },
-  } as ValidTodo;
-
-  const errorResult = {
-    success: false,
-    errors: ["any", "error"],
-  } as InvalidTodo;
-
-  const createTodoUseCaseSpy = vi
-    .spyOn(createTodoUseCaseMod, "createTodoUseCase")
-    .mockResolvedValue(successResult);
-  const deleteTodoUseCaseSpy = vi
-    .spyOn(deleteTodoUseCaseMod, "deleteTodoUseCase")
-    .mockResolvedValue(successResult);
-  const revalidatePathMocked = vi.mocked(revalidatePath);
+  const insertTodoDb = () => db.insert(todoTable);
+  const deleteTodoNoWhere = () => db.delete(todoTable);
+  const deleteTodoDb = (id: string) =>
+    db.delete(todoTable).where(eq(todoTable.id, id));
 
   return {
-    successResult,
-    errorResult,
-    createTodoUseCaseSpy,
-    revalidatePathMocked,
-    deleteTodoUseCaseSpy,
+    todos,
+    repository,
+    insertTodoDb,
+    deleteTodoDb,
+    deleteTodoNoWhere,
   };
+}
+
+export const insertTestTodos = async () => {
+  const { insertTodoDb } = await makeTestTodoRepository();
+  const todos = makeTestTodos();
+
+  await insertTodoDb().values(todos);
+
+  return todos;
+};
+
+export const makeTestTodos = () => {
+  return Array.from({ length: 5 }).map((_, index) => {
+    const newTodo = {
+      id: index.toString(),
+      description: `Todo ${index}`,
+      createdAt: `date ${index}`,
+    };
+
+    return newTodo;
+  });
 };
