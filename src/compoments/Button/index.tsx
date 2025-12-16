@@ -7,11 +7,15 @@ type ButtonSizes = 'sm' | 'md' | 'lg';
 type ButtonProps = {
   variant?: ButtonVariants;
   size?: ButtonSizes;
+  icon?: React.ReactNode;
 } & React.ComponentProps<'button'>;
 
 export function Button({
   variant = 'default',
   size = 'md',
+  icon,
+  children,
+  className,
   ...props
 }: ButtonProps) {
   const buttonVariants: Record<ButtonVariants, string> = {
@@ -52,8 +56,13 @@ export function Button({
     'disabled:bg-slate-200',
     'disabled:text-slate-400',
     'disabled:cursor-not-allowed',
-    props.className,
+    className,
   );
 
-  return <button {...props} className={buttonClasses} />;
+  return (
+    <button {...props} className={buttonClasses}>
+      {icon}
+      {children}
+    </button>
+  );
 }
